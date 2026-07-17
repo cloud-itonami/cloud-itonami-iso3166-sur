@@ -1,0 +1,15 @@
+;; data/culture-tx.edn — DataScript tx-data derived from src/culture/facts.cljc
+;; `culture.facts/catalog` (ADR-2607171400 addendum 2, Wave 1 country-level).
+;; Same shape across every cloud-itonami-iso3166-* sibling. Do not hand-edit;
+;; regenerate from the catalog.
+
+[
+#:culture{:id "sur.dish.pom", :name "Pom", :country "SUR", :kind :dish, :summary "Surinamese oven dish made using arrowleaf elephant ear root (locally called 'pomtajer'), combined with chicken and citrus juice; a popular party dish.", :url "https://en.wikipedia.org/wiki/Pom_(dish)", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:id "sur.dish.roti", :name "Roti", :country "SUR", :kind :dish, :summary "In Suriname, roti refers mainly to dhalpuri or aloo puri and is most often eaten with curried chicken, reflecting the country's Indian-Surinamese community.", :url "https://en.wikipedia.org/wiki/Roti", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:id "sur.dish.moksi-alesi", :name "Moksi-alesi", :country "SUR", :kind :dish, :summary "Surinamese mixed boiled rice dish combining rice with salted meat, shrimp, or fish and vegetables.", :url "https://en.wikipedia.org/wiki/Culture_of_Suriname", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:id "sur.beverage.parbo-bier", :name "Parbo Bier", :country "SUR", :kind :beverage, :summary "5% ABV Surinamese beer brewed by Surinaamse Brouwerij from pale malt, specially cultivated rice, water and hops, holding about 80% domestic market share.", :url "https://en.wikipedia.org/wiki/Surinaamse_Brouwerij", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:url "https://en.wikipedia.org/wiki/Koto_(traditional_clothing)", :id "sur.craft.koto", :kind :craft, :name-local "Kotomisi", :country "SUR", :retrieved-at "2026-07-17", :summary "Traditional dress worn by Afro-Surinamese and Creole women in Suriname, often paired with a head covering called an angisa.", :name "Koto", :url-provenance :wikipedia-en}
+#:culture{:id "sur.festival.ketikoti", :name "Ketikoti", :country "SUR", :kind :festival, :summary "Annual celebration on 1 July marking Emancipation Day in Suriname, commemorating the abolition of slavery in the country in 1863.", :url "https://en.wikipedia.org/wiki/Ketikoti", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:id "sur.heritage.central-suriname-nature-reserve", :name "Central Suriname Nature Reserve", :country "SUR", :kind :heritage, :summary "Conservation unit preserving an area of pristine tropical rainforest in Suriname, designated a UNESCO World Heritage Site in 2000.", :url "https://en.wikipedia.org/wiki/Central_Suriname_Nature_Reserve", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+#:culture{:id "sur.heritage.paramaribo", :name "Historic Inner City of Paramaribo", :country "SUR", :kind :heritage, :summary "The historic inner city of Paramaribo, Suriname's capital, has been a UNESCO World Heritage Site since 2002.", :url "https://en.wikipedia.org/wiki/Paramaribo", :url-provenance :wikipedia-en, :retrieved-at "2026-07-17"}
+]

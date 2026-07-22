@@ -6,4 +6,38 @@
  :itonami.blueprint/governor :market-entry-compliance-governor
  :itonami.blueprint/robotics false
  :itonami.blueprint/required-technologies [:identity :forms :dmn :bpmn :audit-ledger]
- :itonami.blueprint/status :public-oss}
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/implemented-slice
+ "src/marketentry/* (langgraph-clj StateGraph actor, compiled via
+ `operation/build` -> `g/state-graph` -> `g/compile-graph` with
+ `interrupt-before #{:request-approval}`): facts.cljc (official
+ spec-basis catalog -- verified-facts-only: no dedicated
+ 'aanbestedingswet'/procurement-regulator exists for Suriname
+ (exhaustively checked against De Nationale Assemblee's own complete
+ law index), so procurement is grounded in the Comptabiliteitswet 1952
+ + Comptabiliteitsbesluit (G.B. 1953 no. 100) instead; KKF/Wet Kamers
+ van Koophandel 1962 for business registration; Belastingdienst for tax
+ registration (Inkomstenbelasting 1922/Wet Loonbelasting/Wet
+ Omzetbelasting 1997); Investeringswet 2001 + Investsur for investment
+ -- see docs/adr/0001-architecture.md), governor.cljc (Market-Entry
+ Compliance Governor -- spec-basis HARD check, evidence-incomplete HARD
+ check, `:procurement-threshold-noncompliant` HARD check independently
+ recomputing the Comptabiliteitsbesluit Artikel 18 SRD 4,000/SRD 30,000
+ three-tier threshold -- the FLAGSHIP check for this vertical --,
+ engagement-fee-mismatch independent recompute, `:tax-registration-
+ unconfirmed` HARD check (Belastingdienst, unconditional), confidence-
+ floor/actuation gate, plus double-draft/double-submit guards),
+ store.cljc (MemStore + DatomicStore via
+ `io.github.kotoba-lang/langchain-store`), registry.cljc (pure-function
+ filing-draft/filing-submit record construction + fee recompute +
+ procurement-threshold-noncompliant? three-tier pure predicate),
+ marketentryllm.cljc (mock MarketEntry Advisor), operation.cljc (intake
+ -> advise -> govern -> decide -> [request-approval ->] commit/hold
+ StateGraph), phase.cljc (0->3 rollout, `:filing/draft`/`:filing/submit`
+ permanently excluded from every phase's `:auto` set). Tests cover:
+ governor contract (including all three tiers of the flagship
+ procurement-threshold check in both compliant/noncompliant directions),
+ store parity, facts, phase, registry -- plus this repo's separate
+ `culture`/`statute` domain namespaces, left untouched. clj-kondo
+ clean."}

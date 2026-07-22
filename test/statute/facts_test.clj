@@ -1,0 +1,30 @@
+(ns statute.facts-test
+  (:require [clojure.string :as str]
+            [clojure.test :refer [deftest is]]
+            [statute.facts :as facts]))
+
+(deftest sur-has-spec-basis
+  (let [sb (facts/spec-basis "SUR")]
+    (is (= 9 (count sb)))
+    (is (every? #(str/starts-with? (:statute/url %) "https://") sb))
+    (is (every? :statute/law-number sb))))
+
+(deftest unknown-jurisdiction-has-no-spec-basis
+  (is (nil? (facts/spec-basis "ATL")))
+  (is (nil? (facts/spec-basis "ZZZ"))))
+
+(deftest coverage-is-honest
+  (let [c (facts/coverage ["SUR" "JPN" "ATL"])]
+    (is (= 3 (:requested c)))
+    (is (= 1 (:covered c)))
+    (is (= ["ATL" "JPN"] (:missing-jurisdictions c)))))
+
+(deftest by-topic-filters
+  (is (= #{"sur.wet-loonbelasting" "sur.arbeidswet-1963"}
+         (set (mapv :statute/id (facts/by-topic "SUR" :labor)))))
+  (is (= #{"sur.comptabiliteitswet-1952" "sur.comptabiliteitsbesluit"}
+         (set (mapv :statute/id (facts/by-topic "SUR" :procurement)))))
+  (is (= ["sur.investeringswet-2001"]
+         (mapv :statute/id (facts/by-topic "SUR" :investment))))
+  (is (empty? (facts/by-topic "SUR" :environment)))
+  (is (empty? (facts/by-topic "ATL" :labor))))

@@ -1,0 +1,52 @@
+(ns marketentry.facts-test
+  (:require [clojure.test :refer [deftest is testing]]
+            [marketentry.facts :as facts]))
+
+(deftest sur-has-spec-basis
+  (let [sb (facts/spec-basis "SUR")]
+    (is (some? sb))
+    (is (string? (:provenance sb)))
+    (is (seq (:required-evidence sb)))
+    (is (some? (facts/corporate-number-spec-basis "SUR")))
+    (is (some? (facts/business-registration-spec-basis "SUR")))
+    (is (some? (facts/procurement-threshold-spec-basis "SUR")))))
+
+(deftest sur-owner-authority-honestly-states-no-dedicated-regulator
+  (testing "no dedicated procurement-regulator agency was found for Suriname -- the catalog says so honestly, not a fabricated acronym"
+    (let [sb (facts/spec-basis "SUR")]
+      (is (re-find #"No dedicated procurement-regulator agency" (:owner-authority sb))))))
+
+(deftest sur-procurement-threshold-spec-basis-has-both-tiers
+  (testing "the Comptabiliteitsbesluit Artikel 18 SRD 4,000 / SRD 30,000 tiers are present"
+    (let [pt (facts/procurement-threshold-spec-basis "SUR")]
+      (is (some? pt))
+      (is (= 30000 (:procurement-threshold-public-tender-srd pt)))
+      (is (= 4000 (:procurement-threshold-council-approval-srd pt))))))
+
+(deftest sur-business-registration-is-a-separate-body-from-tax
+  (testing "business registration (KKF) is a DIFFERENT body than the tax registrar (Belastingdienst)"
+    (let [reg (facts/business-registration-spec-basis "SUR")
+          tax (facts/corporate-number-spec-basis "SUR")]
+      (is (some? reg))
+      (is (some? tax))
+      (is (not= (:business-registration-owner-authority reg)
+                (:corporate-number-owner-authority tax))))))
+
+(deftest unknown-jurisdiction-has-no-spec-basis
+  (is (nil? (facts/spec-basis "ATL")))
+  (is (nil? (facts/spec-basis "ZZZ")))
+  (is (nil? (facts/business-registration-spec-basis "ATL")))
+  (is (nil? (facts/procurement-threshold-spec-basis "ATL"))))
+
+(deftest required-evidence-satisfied
+  (let [sb (facts/spec-basis "SUR")
+        all (:required-evidence sb)]
+    (is (true? (facts/required-evidence-satisfied? "SUR" all)))
+    (is (not (facts/required-evidence-satisfied? "SUR" (take 1 all))))
+    (is (nil? (facts/required-evidence-satisfied? "ATL" all)))))
+
+(deftest coverage-is-honest
+  (let [c (facts/coverage ["SUR" "USA" "ATL"])]
+    (is (= 3 (:requested c)))
+    (is (= 2 (:covered c)))
+    (is (= ["ATL"] (:missing-jurisdictions c)))))

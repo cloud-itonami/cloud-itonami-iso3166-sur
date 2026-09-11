@@ -121,8 +121,8 @@ noncompliant), `eng-7` (middle tier, approval on file -> NOT
 noncompliant), `eng-8` (top tier, presidential exception on file ->
 NOT noncompliant), and `eng-9` (top tier, properly tendered -> NOT
 noncompliant) prove all three tiers in both directions, mirrored by
-`test/marketentry/registry_test.clj` and
-`test/marketentry/governor_contract_test.clj`.
+`test/marketentry/registry_test.cljk` and
+`test/marketentry/governor_contract_test.cljk`.
 
 ### Other HARD checks (all unoverridable)
 
@@ -161,7 +161,7 @@ check slot.
 
 ### What was NOT touched
 
-- `src/culture/facts.cljc` (and `schema/culture.edn` /
+- `src/culture/facts.cljk` (and `schema/culture.edn` /
   `data/culture-tx.edn`) is completely untouched.
 - `CONTRIBUTING.md`/`GOVERNANCE.md` had their leftover "Cambodia"/
   "Cambodian" template references corrected to Suriname, but their

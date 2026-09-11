@@ -21,7 +21,7 @@ the English is this repo's own translation).
 
 ## Regulatory catalog (verified facts only)
 
-Every fact in `src/marketentry/facts.cljc` traces to an official/
+Every fact in `src/marketentry/facts.cljk` traces to an official/
 primary source fetched and read directly this session. See that
 namespace's docstring for the full source list. **Headline finding,
 verified rather than assumed**: Suriname has **no dedicated
@@ -83,7 +83,7 @@ is titled with 'aanbesteding'. Instead:
   guessed domain, `investsur.sr`, timed out) -- its existence/legal
   basis rests on the primary law text, not a self-asserted site claim.
 
-See `src/marketentry/facts.cljc`'s namespace docstring for the "explicitly
+See `src/marketentry/facts.cljk`'s namespace docstring for the "explicitly
 NOT claimed" section listing every fabrication trap deliberately avoided
 (no invented procurement-regulator acronym, no invented e-procurement
 portal, no invented tax-ID scheme name, no invented local-content law).
@@ -97,7 +97,7 @@ portal, no invented tax-ID scheme name, no invented local-content law).
 | Ops | `:engagement/intake` · `:jurisdiction/assess` · `:filing/draft` · `:filing/submit` |
 | Flagship HARD check | `procurement-threshold-noncompliant` (Comptabiliteitsbesluit Artikel 18's SRD 4,000/SRD 30,000 three-tier threshold recompute -- genuinely different SHAPE from every sibling actor's own flagship, a numeric tier recompute rather than a trigger-set or boolean flag; see `docs/adr/0001-architecture.md`) |
 | Other checks | `evidence-incomplete` · `engagement-fee-mismatch` · `tax-registration-unconfirmed` (Belastingdienst, unconditional) |
-| Compliance catalog | `src/statute/facts.cljc` -- Handelsregisterwet 1936, Wet Kamers van Koophandel 1962, Comptabiliteitswet 1952, Comptabiliteitsbesluit, Investeringswet 2001, Inkomstenbelasting 1922, Wet Loonbelasting, Wet Omzetbelasting 1997, Arbeidswet 1963 |
+| Compliance catalog | `src/statute/facts.cljk` -- Handelsregisterwet 1936, Wet Kamers van Koophandel 1962, Comptabiliteitswet 1952, Comptabiliteitsbesluit, Investeringswet 2001, Inkomstenbelasting 1922, Wet Loonbelasting, Wet Omzetbelasting 1997, Arbeidswet 1963 |
 | Tests | `clojure -M:dev:test` |
 | Demo | `clojure -M:dev:run` |
 | Architecture ADR | [`docs/adr/0001-architecture.md`](docs/adr/0001-architecture.md) |
@@ -131,7 +131,7 @@ Concretely, in `marketentry.operation/build`'s StateGraph,
 `:filing/submit` proposal reaches that node -- there is no code path
 that reaches `:commit` for either op without a human explicitly
 resuming the run with `{:approval {:status :approved :by "<human>"}}`.
-`test/marketentry/governor_contract_test.clj`'s
+`test/marketentry/governor_contract_test.cljk`'s
 `filing-draft-and-submit-never-auto-commit` test asserts this
 end-to-end, at phase 3 (the most permissive phase).
 
@@ -203,7 +203,7 @@ Alongside the market-entry / statute catalogs, this repo carries a
 `com-junkawasaki/root`) — national dishes, protected products, beverages,
 crafts, festivals and heritage sites for Suriname:
 
-- `src/culture/facts.cljc` — the catalog, source of truth (keyed by
+- `src/culture/facts.cljk` — the catalog, source of truth (keyed by
   uppercase ISO3, mirroring `statute.facts`).
 - `schema/culture.edn` — DataScript schema.
 - `data/culture-tx.edn` — derived DataScript tx-data (regenerated from

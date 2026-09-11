@@ -98,8 +98,8 @@ portal, no invented tax-ID scheme name, no invented local-content law).
 | Flagship HARD check | `procurement-threshold-noncompliant` (Comptabiliteitsbesluit Artikel 18's SRD 4,000/SRD 30,000 three-tier threshold recompute -- genuinely different SHAPE from every sibling actor's own flagship, a numeric tier recompute rather than a trigger-set or boolean flag; see `docs/adr/0001-architecture.md`) |
 | Other checks | `evidence-incomplete` · `engagement-fee-mismatch` · `tax-registration-unconfirmed` (Belastingdienst, unconditional) |
 | Compliance catalog | `src/statute/facts.cljk` -- Handelsregisterwet 1936, Wet Kamers van Koophandel 1962, Comptabiliteitswet 1952, Comptabiliteitsbesluit, Investeringswet 2001, Inkomstenbelasting 1922, Wet Loonbelasting, Wet Omzetbelasting 1997, Arbeidswet 1963 |
-| Tests | `clojure -M:dev:test` |
-| Demo | `clojure -M:dev:run` |
+| Tests | `kbb -M:dev:test` |
+| Demo | `kbb -M:dev:run` |
 | Architecture ADR | [`docs/adr/0001-architecture.md`](docs/adr/0001-architecture.md) |
 
 `:filing/submit` is never in any phase's `:auto` set -- human sign-off
